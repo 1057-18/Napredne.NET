@@ -1,0 +1,51 @@
+﻿@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Add Employee";
+}
+
+<div class="container-fluid text-center" style="width: 1000px; text-align: center;">
+
+    <div class="row" style="justify-content: center; align-items: center;">
+        <div class="col">
+            <h4>Employee @Model.HeaderString</h4>
+        </div>
+        <div class="col">
+            <form method="post" asp-action="Save">
+                <label>First Name</label><span asp-validation-for="EmployeeForm.FirstName" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="EmployeeForm.FirstName" />
+                <br />
+                <label>Last Name</label><span asp-validation-for="EmployeeForm.LastName" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="EmployeeForm.LastName" />
+                <br />
+                <label>Job Title</label><span asp-validation-for="EmployeeForm.JobTitle" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="EmployeeForm.JobTitle" />
+                <br />
+                <label>Date Of Hire</label><span asp-validation-for="StringDateOfHire" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="StringDateOfHire" />
+                <br />
+                <label>Department</label><span asp-validation-for="StringDepartment" class="text-danger"></span>
+                <select class="form-control custom-select" asp-for="StringDepartment">
+                    <option disabled selected></option>
+                    @foreach (DataAccessLayer.Models.Department department in Model.DepartmentList)
+                    {
+                        <option>@department.Name</option>
+                    }
+                </select>
+                <br />
+                <br />
+                <br />
+                <button type="submit" class="btn btn-info btn-block" style="background-color: #bee5eb; color: #212529;"><i class="far fa-save"></i>&nbsp;&nbsp;&nbsp;Save</button>
+            </form>
+            <form method="get">
+                <br />
+                <button class="btn btn-secondary btn-block" style="background-color: #d6d8db; color: #212529;" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

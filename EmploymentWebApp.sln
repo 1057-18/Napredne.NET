@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmploymentWebApp", "EmploymentWebApp\EmploymentWebApp.csproj", "{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{464A2989-DFD2-4B36-BF57-6F473D3D2A9E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{464A2989-DFD2-4B36-BF57-6F473D3D2A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{464A2989-DFD2-4B36-BF57-6F473D3D2A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{464A2989-DFD2-4B36-BF57-6F473D3D2A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{464A2989-DFD2-4B36-BF57-6F473D3D2A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
