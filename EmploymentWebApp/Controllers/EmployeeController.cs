@@ -16,7 +16,7 @@ namespace EmploymentWebApp.Controllers
     public class EmployeeController : Controller
     {
         IUnitOfWork _unitOfWork;
-        public static int _idEditedEmployee = 0;
+        private static int _idEditedEmployee = 0;
 
         public EmployeeController(IUnitOfWork unitOfWork)
         {
@@ -32,23 +32,29 @@ namespace EmploymentWebApp.Controllers
         {
             if (id == 0)
             {
-                return View("AddOrEdit", new EmployeeViewModel() { HeaderString = "Add", DepartmentList = _unitOfWork.Departments.GetAll().ToList() });
+                return View(new EmployeeViewModel() { HeaderString = "Add", DepartmentList = _unitOfWork.Departments.GetAll().ToList() });
             }
             else
             {
-                Employee employee = _unitOfWork.Employees.Find(e => e.Id == id).ToList()[0];
-                EmployeeController._idEditedEmployee = employee.Id;
+                Employee employee = _unitOfWork.Employees.Get(id);
+                _idEditedEmployee = employee.Id;
                 EmployeeViewModel employeeViewModel = EmployeeToEmployeeViewModel(employee);
                 employeeViewModel.HeaderString = "Edit";
-                return View("AddOrEdit", employeeViewModel);
+                return View(employeeViewModel);
             }
+        }
+
+        public IActionResult Details(int id)
+        {
+            return View(EmployeeToEmployeeViewModel(_unitOfWork.Employees.Get(id)));
         }
 
         public IActionResult Save(EmployeeViewModel employeeViewModel)
         {
             Employee employee = EmployeeViewModelToEmployee(employeeViewModel);
             employee.Id = EmployeeController._idEditedEmployee;
-            if (!_unitOfWork.Employees.GetAll().ToList().Contains(employee))
+            _idEditedEmployee = 0;
+            if (!_unitOfWork.Employees.GetAllNoTracking().ToList().Contains(employee))
             {
                 employee.Id = _unitOfWork.Employees.GetUniqueId();
                 _unitOfWork.Employees.Add(employee);
@@ -63,7 +69,7 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult Delete(int id)
         {
-            _unitOfWork.Employees.Remove(_unitOfWork.Employees.Find(e => e.Id == id).ToList()[0]);
+            _unitOfWork.Employees.Remove(_unitOfWork.Employees.Get(id));
             _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
@@ -71,16 +77,6 @@ namespace EmploymentWebApp.Controllers
         public DateTime ParseDateTimeString(string dateString)
         {
             return DateTime.ParseExact(dateString, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-        }
-
-        public int GetDepartmentId(string departmentString)
-        {
-            return _unitOfWork.Departments.GetDepartmentId(departmentString);
-        }
-
-        public string GetDepartmentName(int id)
-        {
-            return _unitOfWork.Departments.GetDepartmentName(id);
         }
 
         public List<EmployeeViewModel> PrepareForView(List<Employee> employees)
@@ -98,8 +94,9 @@ namespace EmploymentWebApp.Controllers
             return new EmployeeViewModel()
             {
                 EmployeeForm = employee,
-                StringDateOfHire = employee.DateOfHire.ToString("dd-MM-yyyy"),
-                StringDepartment = GetDepartmentName(employee.DepartmentId),
+                StringDateOfHire = employee.DateOfHire.ToString("dd-MMM-yyyy"),
+                StringDateInput = employee.DateOfHire.ToString("dd-MM-yyyy"),
+                StringDepartment = employee.Department.Name,
                 DepartmentList = _unitOfWork.Departments.GetAll().ToList()
             };
         }
@@ -107,8 +104,8 @@ namespace EmploymentWebApp.Controllers
         public Employee EmployeeViewModelToEmployee(EmployeeViewModel employeeViewModel)
         {
             Employee employee = employeeViewModel.EmployeeForm;
-            employee.DateOfHire = ParseDateTimeString(employeeViewModel.StringDateOfHire);
-            employee.DepartmentId = GetDepartmentId(employeeViewModel.StringDepartment);
+            employee.Department = _unitOfWork.Departments.Find(d => d.Name == employeeViewModel.StringDepartment).ToList()[0];
+            employee.DateOfHire = ParseDateTimeString(employeeViewModel.StringDateInput);
             return employee;
         }
     }

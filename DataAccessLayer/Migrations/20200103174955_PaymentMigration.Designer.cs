@@ -3,14 +3,16 @@ using System;
 using DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(EmploymentContext))]
-    partial class EmploymentContextModelSnapshot : ModelSnapshot
+    [Migration("20200103174955_PaymentMigration")]
+    partial class PaymentMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,10 +81,6 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("varchar(120) CHARACTER SET utf8mb4")
-                        .HasMaxLength(120);
 
                     b.Property<string>("PaymentType")
                         .IsRequired()

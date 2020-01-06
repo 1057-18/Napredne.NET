@@ -1,0 +1,44 @@
+﻿@model PaymentViewModel
+@{
+    ViewData["Title"] = "Payment Details";
+}
+
+<div class="container-fluid text-center" style="width: 1000px; text-align: center;">
+
+    <div class="row" style="justify-content: center; align-items: center;">
+        <div class="col">
+            <h4>Payment Details</h4>
+        </div>
+        <div class="col">
+            <form method="post">
+                <label>Employee ID</label>
+                <input class="form-control" type="text" asp-for="PaymentForm.EmployeeId" readonly>
+                <br />
+                <label>Payment Type</label>
+                <input class="form-control" type="text" asp-for="StringPaymentType" readonly>
+                <br />
+                <label>Amount</label>
+                <input class="form-control" type="text" asp-for="StringAmount" readonly>
+                <br />
+                <label>Note</label>
+                <textarea class="form-control" rows="4" type="text" asp-for="PaymentForm.Note" readonly></textarea>
+                <br />
+                <br />
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-warning btn-block" asp-action="AddOrEdit" asp-route-id="@Model.PaymentForm.Id"><i class="fas fa-user-edit"></i>&nbsp;&nbsp;&nbsp;Edit</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-danger btn-block" asp-action="Delete" asp-route-id="@Model.PaymentForm.Id" onclick="return confirm('Are you sure you want to delete this record?')"><i class="fas fa-trash"></i>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                </div>
+            </form>
+            <form method="get" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            </form>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>

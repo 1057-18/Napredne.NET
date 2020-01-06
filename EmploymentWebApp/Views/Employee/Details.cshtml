@@ -1,0 +1,47 @@
+﻿@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Employee Details";
+}
+
+<div class="container-fluid text-center" style="width: 1000px; text-align: center;">
+
+    <div class="row" style="justify-content: center; align-items: center;">
+        <div class="col">
+            <h4>Employee Details</h4>
+        </div>
+        <div class="col">
+            <form method="post">
+                <label>First Name</label>
+                <input class="form-control" type="text" asp-for="EmployeeForm.FirstName" readonly>
+                <br />
+                <label>Last Name</label>
+                <input class="form-control" type="text" asp-for="EmployeeForm.LastName" readonly>
+                <br />
+                <label>Job Title</label>
+                <input class="form-control" type="text" asp-for="EmployeeForm.JobTitle" readonly>
+                <br />
+                <label>Date Of Hire</label>
+                <input class="form-control" type="text" asp-for="StringDateInput" readonly>
+                <br />
+                <label>Department</label>
+                <input class="form-control" type="text" asp-for="StringDepartment" readonly>
+                <br />
+                <br />
+                <div class="form-row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-info btn-block" asp-action="AddOrEdit" asp-route-id="@Model.EmployeeForm.Id"><i class="fas fa-user-edit"></i>&nbsp;&nbsp;&nbsp;Edit</button>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-danger btn-block" asp-action="Delete" asp-route-id="@Model.EmployeeForm.Id" onclick="return confirm('Are you sure you want to delete this record?')"><i class="fas fa-trash"></i>&nbsp;&nbsp;&nbsp;Delete</button>
+                    </div>
+                </div>
+            </form>
+            <form method="get" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            </form>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>

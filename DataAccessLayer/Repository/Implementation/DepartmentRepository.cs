@@ -13,15 +13,5 @@ namespace DataAccessLayer.Repository.Implementation
         }
 
         public EmploymentContext context { get { return Context as EmploymentContext; } }
-
-        public int GetDepartmentId(string name)
-        {
-            return Find(d => d.Name == name).ToList()[0].Id;
-        }
-
-        public string GetDepartmentName(int id)
-        {
-            return Find(d => d.Id == id).ToList()[0].Name;
-        }
     }
 }

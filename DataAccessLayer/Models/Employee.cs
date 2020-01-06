@@ -18,17 +18,11 @@ namespace DataAccessLayer.Models
         public string JobTitle { get; set; }
         public DateTime DateOfHire { get; set; }
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Employee);
-        }
+        public virtual Department Department { get; set; }
 
         public bool Equals([AllowNull] Employee other)
         {
-            return other != null &&
-                   Id == other.Id;
+            return other != null && Id == other.Id;
         }
     }
 }

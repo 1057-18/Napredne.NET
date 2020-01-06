@@ -42,7 +42,7 @@ namespace DataAccessLayer.Repository.Implementation
 
         public IEnumerable<TEntity> GetAll()
         {
-            return Context.Set<TEntity>().AsNoTracking();
+            return Context.Set<TEntity>();
         }
 
         public void Remove(TEntity entity)
@@ -53,6 +53,11 @@ namespace DataAccessLayer.Repository.Implementation
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             Context.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public IEnumerable<TEntity> GetAllNoTracking()
+        {
+            return Context.Set<TEntity>().AsNoTracking();
         }
     }
 }

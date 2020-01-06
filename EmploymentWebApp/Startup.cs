@@ -28,7 +28,7 @@ namespace EmploymentWebApp
         {
             services.AddControllersWithViews();
             // injectujemo conn string iz appsettings.json
-            services.AddDbContext<EmploymentContext>(options => options.UseMySql(Configuration.GetConnectionString("BazaNapredne")));
+            services.AddDbContext<EmploymentContext>(options => options.UseLazyLoadingProxies().UseMySql(Configuration.GetConnectionString("BazaNapredne")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 

@@ -34,38 +34,11 @@ namespace DataAccessLayer
                 .HasForeignKey(e => e.DepartmentId);
 
             modelBuilder.Entity<Payment>().HasKey(p => p.Id);
-            modelBuilder.Entity<Payment>().Property(p => p.PaymentType).HasConversion<string>();
+            modelBuilder.Entity<Payment>().Property(p => p.PaymentType).HasConversion(c => c.ToString(), c => Enum.Parse<PaymentType>(c));
             modelBuilder.Entity<Payment>()
                 .HasOne(p => p.Employee)
                 .WithMany()
                 .HasForeignKey(p  => p.EmployeeId);
-        }
-
-        public int Save(Employee employee)
-        {
-            Employees.Add(employee);
-            return SaveChanges();
-        }
-
-        public int Delete(Employee employee)
-        {
-            Employees.Remove(employee);
-            return SaveChanges();
-        }
-
-        public IQueryable<Employee> Get(Employee employee)
-        {
-            IQueryable<Employee> Result = Employees;
-            if (employee.Id > 0) Result = Result.Where<Employee>(e => e.Id == employee.Id);
-            if (employee.FirstName != null) Result = Result.Where<Employee>(e => e.FirstName == employee.FirstName);
-            if (employee.LastName != null) Result = Result.Where<Employee>(e => e.LastName == employee.FirstName);
-            if (employee.DepartmentId > 0) Result = Result.Where<Employee>(e => e.DepartmentId == employee.DepartmentId);
-            return Result;
-        }
-
-        public IQueryable<Employee> GetAllEmployees()
-        {
-            return Employees;
         }
     }
 }

@@ -45,3 +45,8 @@
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/wwwroot/lib/jquery/dist/jquery.js
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Employee/AddOrEdit.cshtml.g.cs
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Payment/Index.cshtml.g.cs
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/Castle.Core.dll
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/Microsoft.EntityFrameworkCore.Proxies.dll
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Payment/AddOrEdit.cshtml.g.cs
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Employee/Details.cshtml.g.cs
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Payment/Details.cshtml.g.cs

@@ -1,0 +1,53 @@
+﻿@model PaymentViewModel
+@{
+    ViewData["Title"] = "Add or Edit Payment";
+}
+
+<div class="container-fluid text-center" style="width: 1000px; text-align: center;">
+
+    <div class="row" style="justify-content: center; align-items: center;">
+        <div class="col">
+            <h4>Payment @Model.HeaderString</h4>
+        </div>
+        <div class="col">
+            <form method="post" asp-action="Save">
+                <label>Employee ID</label><span asp-validation-for="PaymentForm.EmployeeId" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="PaymentForm.EmployeeId" />
+                <br />
+                <label>Payment Type</label><span asp-validation-for="StringPaymentType" class="text-danger"></span>
+                <select class="form-control custom-select" asp-for="StringPaymentType">
+                    <option disabled selected></option>
+                    @foreach (string paymentType in Model.PaymentTypes)
+                    {
+                        <option>@paymentType.ToString()</option>
+                    }
+                </select><br />
+                <br />
+                <label>Amount</label><span asp-validation-for="StringAmount" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="StringAmount" />
+                <br />
+                <label>Note (optional)</label><span asp-validation-for="PaymentForm.Note" class="text-danger"></span>
+                <textarea class="form-control" rows="4" type="text" asp-for="PaymentForm.Note"></textarea>
+                <br />
+                <br />
+                @if (Model.HeaderString == "Add")
+                {
+                    <button type="submit" class="btn btn-warning btn-block"><i class="fas fa-money-check-alt"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Are you sure you want to make changes to this record?')"><i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
+                }
+            </form>
+            <form method="get" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            </form>
+        </div>
+        <div class="col">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

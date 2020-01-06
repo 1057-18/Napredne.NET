@@ -8,6 +8,7 @@ namespace DataAccessLayer.Repository
     {
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAllNoTracking();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression);
 
         void Add(TEntity entity);

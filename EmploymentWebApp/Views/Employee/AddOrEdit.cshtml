@@ -1,6 +1,6 @@
 ﻿@model EmployeeViewModel
 @{
-    ViewData["Title"] = "Add Employee";
+    ViewData["Title"] = "Add or Edit Employee";
 }
 
 <div class="container-fluid text-center" style="width: 1000px; text-align: center;">
@@ -20,8 +20,8 @@
                 <label>Job Title</label><span asp-validation-for="EmployeeForm.JobTitle" class="text-danger"></span>
                 <input class="form-control" type="text" asp-for="EmployeeForm.JobTitle" />
                 <br />
-                <label>Date Of Hire</label><span asp-validation-for="StringDateOfHire" class="text-danger"></span>
-                <input class="form-control" type="text" asp-for="StringDateOfHire" />
+                <label>Date Of Hire</label><span asp-validation-for="StringDateInput" class="text-danger"></span>
+                <input class="form-control" type="text" asp-for="StringDateInput" />
                 <br />
                 <label>Department</label><span asp-validation-for="StringDepartment" class="text-danger"></span>
                 <select class="form-control custom-select" asp-for="StringDepartment">
@@ -34,11 +34,17 @@
                 <br />
                 <br />
                 <br />
-                <button type="submit" class="btn btn-info btn-block" style="background-color: #bee5eb; color: #212529;"><i class="far fa-save"></i>&nbsp;&nbsp;&nbsp;Save</button>
+                @if (Model.HeaderString == "Add")
+                {
+                    <button type="submit" class="btn btn-info btn-block")"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-info btn-block" onclick="return confirm('Are you sure you want to make changes to this record?')"><i class="fas fa-user-check"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
+                }
             </form>
-            <form method="get">
-                <br />
-                <button class="btn btn-secondary btn-block" style="background-color: #d6d8db; color: #212529;" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            <form method="get" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
             </form>
         </div>
         <div class="col">
