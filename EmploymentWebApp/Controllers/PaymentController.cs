@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.Interface;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,21 @@ namespace EmploymentWebApp.Models
 {
     public class PaymentController : Controller
     {
-        IUnitOfWork _unitOfWork;
+        private readonly IEmployeeService _employeeService;
+        private readonly IPaymentService _paymentService;
+        private readonly IDepartmentsService _departmentsService;
         private static int _idEditedPayment = 0;
 
-        public PaymentController(IUnitOfWork unitOfWork)
+        public PaymentController(IEmployeeService employeeService, IPaymentService paymentService, IDepartmentsService departmentsService)
         {
-            _unitOfWork = unitOfWork;
+            _employeeService = employeeService;
+            _paymentService = paymentService;
+            _departmentsService = departmentsService;
         }
 
         public IActionResult Index()
         {
-            return View(PrepareForView(_unitOfWork.Payments.GetAll().ToList()));
+            return View(PrepareForView(_paymentService.GetAll().ToList()));
         }
         
         public IActionResult AddOrEdit(int id = 0)
@@ -32,7 +37,7 @@ namespace EmploymentWebApp.Models
             }
             else
             {
-                Payment payment = _unitOfWork.Payments.Get(id);
+                Payment payment = _paymentService.Get(id);
                 _idEditedPayment = payment.Id;
                 PaymentViewModel paymentViewModel = PaymentToPaymentViewModel(payment);
                 paymentViewModel.HeaderString = "Edit";
@@ -42,7 +47,7 @@ namespace EmploymentWebApp.Models
 
         public IActionResult Details(int id)
         {
-            return View(PaymentToPaymentViewModel(_unitOfWork.Payments.Get(id)));
+            return View(PaymentToPaymentViewModel(_paymentService.Get(id)));
         }
 
         public IActionResult Save(PaymentViewModel paymentViewModel)
@@ -50,23 +55,21 @@ namespace EmploymentWebApp.Models
             Payment payment = PaymentViewModelToPayment(paymentViewModel);
             payment.Id = _idEditedPayment;
             _idEditedPayment = 0;
-            if (!_unitOfWork.Payments.GetAllNoTracking().ToList().Contains(payment))
+            if (!_paymentService.GetAllWithOutTracking().ToList().Contains(payment))
             {
-                payment.Id = _unitOfWork.Payments.GetUniqueId();
-                _unitOfWork.Payments.Add(payment);
+                payment.Id = _paymentService.GetUniqueId();
+                _paymentService.Add(payment);
             }
             else
             {
-                _unitOfWork.Payments.Update(payment);
+                _paymentService.Update(payment);
             }
-            _unitOfWork.Complete();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            _unitOfWork.Payments.Remove(_unitOfWork.Payments.Get(id));
-            _unitOfWork.Complete();
+            _paymentService.Remove(_paymentService.Get(id));
             return RedirectToAction("Index");
         }
 

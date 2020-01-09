@@ -1690,6 +1690,19 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
+      "BusinessLogicLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "dependencies": {
+          "DataAccessLayer": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BusinessLogicLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessLogicLayer.dll": {}
+        }
+      },
       "DataAccessLayer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.0",
@@ -5916,6 +5929,11 @@
         "system.xml.xmldocument.nuspec"
       ]
     },
+    "BusinessLogicLayer/1.0.0": {
+      "type": "project",
+      "path": "../BusinessLogicLayer/BusinessLogicLayer.csproj",
+      "msbuildProject": "../BusinessLogicLayer/BusinessLogicLayer.csproj"
+    },
     "DataAccessLayer/1.0.0": {
       "type": "project",
       "path": "../DataAccessLayer/DataAccessLayer.csproj",
@@ -5924,6 +5942,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "BusinessLogicLayer >= 1.0.0",
       "DataAccessLayer >= 1.0.0"
     ]
   },
@@ -5955,6 +5974,9 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
+            "/Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/BusinessLogicLayer.csproj": {
+              "projectPath": "/Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/BusinessLogicLayer.csproj"
+            },
             "/Users/jovanbubonja/Desktop/Employment WebApp/DataAccessLayer/DataAccessLayer.csproj": {
               "projectPath": "/Users/jovanbubonja/Desktop/Employment WebApp/DataAccessLayer/DataAccessLayer.csproj"
             }

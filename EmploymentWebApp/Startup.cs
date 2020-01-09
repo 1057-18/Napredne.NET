@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLogicLayer.Implementation;
+using BusinessLogicLayer.Interface;
 using DataAccessLayer;
 using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +32,9 @@ namespace EmploymentWebApp
             // injectujemo conn string iz appsettings.json
             services.AddDbContext<EmploymentContext>(options => options.UseLazyLoadingProxies().UseMySql(Configuration.GetConnectionString("BazaNapredne")));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IDepartmentsService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
