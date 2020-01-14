@@ -29,9 +29,9 @@ namespace EmploymentWebApp.Controllers
             _departmentsService = departmentsService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? pageNumber)
         {
-            return View(PrepareForView(_employeeService.GetAll().ToList()));
+            return View(PaginatedList<EmployeeViewModel>.Create(PrepareForView(_employeeService.GetAll().ToList()), pageNumber ?? 1, 8));
         }
 
         public IActionResult AddOrEdit(int id = 0)
@@ -57,17 +57,20 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult Save(EmployeeViewModel employeeViewModel)
         {
-            Employee employee = EmployeeViewModelToEmployee(employeeViewModel);
-            employee.Id = EmployeeController._idEditedEmployee;
-            _idEditedEmployee = 0;
-            if (!_employeeService.GetAllWithOutTracking().ToList().Contains(employee))
+            if (ModelState.IsValid)
             {
-                employee.Id = _employeeService.GetUniqueId();
-                _employeeService.Add(employee);
-            }
-            else
-            {
-                _employeeService.Update(employee);
+                Employee employee = EmployeeViewModelToEmployee(employeeViewModel);
+                employee.Id = EmployeeController._idEditedEmployee;
+                _idEditedEmployee = 0;
+                if (!_employeeService.GetAllWithOutTracking().ToList().Contains(employee))
+                {
+                    employee.Id = _employeeService.GetUniqueId();
+                    _employeeService.Add(employee);
+                }
+                else
+                {
+                    _employeeService.Update(employee);
+                }
             }
             return RedirectToAction("Index");
         }

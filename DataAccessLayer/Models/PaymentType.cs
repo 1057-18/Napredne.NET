@@ -3,10 +3,16 @@ namespace DataAccessLayer.Models
 {
     public enum PaymentType
     {
-        Paycheck,
+        WageViaPaycheck,
+        WageViaDirectDeposit,
         OvertimeBonus,
-        HolidayBonus,
-        TransportationBenefit,
-        MedicalBenefit
+        PaidHoliday,
+        Mobility,
+        MedicalInsurence,
+        FoodAndBeverage,
+        PensionPlan,
+        PaidTimeOff,
+        ProfessionalDevelopment,
+        WorkFromHomeCompensation
     }
 }

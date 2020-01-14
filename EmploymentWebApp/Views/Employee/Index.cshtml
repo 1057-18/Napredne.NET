@@ -1,11 +1,11 @@
-﻿@model List<EmployeeViewModel>
+﻿@model PaginatedList<EmployeeViewModel>
 @{
     ViewData["Title"] = "Employee Register";
 }
 
 <div class="container-fluid" style="text-align: center">
     <h4>Employee Register</h4><br /><br />
-    <table class="table table-hover table-responsive-sm">
+    <table class="table table-hover table-responsive-sm" style="border-bottom: 1px solid #dee2e6">
         <thead class="table-info">
             <tr>
                 <th scope="col"><a asp-action="AddOrEdit" class="btn btn-outline-dark" style="font-weight: bold; border: none;"><i class="far fa-plus-square"></i> Employee</a></th>
@@ -35,5 +35,34 @@
             }
         </tbody>
     </table>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <nav aria-label="Page navigation" style="padding-top: 15px">
+        <ul class="pagination pagination-lg justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a class="page-link" href="@(Url.Action("Index", "Employee", new { pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex - 1}))" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            @for (int i = 1; i < PaginatedList<EmployeeViewModel>.TotalPages + 1; i++)
+            {
+                if (PaginatedList<EmployeeViewModel>.PageIndex == i)
+                {
+                    <li class="page-item active"><a class="page-link" href="@(Url.Action("Index","Employee", new { pageNumber = i }))">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Employee", new { pageNumber = i }))">@i</a></li>
+                }
+            }
+            <li class="page-item @nextDisabled">
+                <a class="page-link" href="@(Url.Action("Index", "Employee", new { pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex + 1}))" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 

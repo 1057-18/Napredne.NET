@@ -1,4 +1,4 @@
-﻿@model List<PaymentViewModel>
+﻿@model PaginatedList<PaymentViewModel>
 @{
     ViewData["Title"] = "Payment Register";
 }
@@ -35,4 +35,33 @@
             }
         </tbody>
     </table>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <nav aria-label="Page navigation" style="padding-top: 15px">
+        <ul class="pagination pagination-lg justify-content-center">
+            <li class="page-item @prevDisabled">
+                <a class="page-link" href="@(Url.Action("Index", "Payment", new { pageNumber =  PaginatedList<PaymentViewModel>.PageIndex - 1}))" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            @for (int i = 1; i < PaginatedList<PaymentViewModel>.TotalPages + 1; i++)
+            {
+                if (PaginatedList<PaymentViewModel>.PageIndex == i)
+                {
+                    <li class="page-item active"><a class="page-link" style="background-color: #cf8f5f" href="@(Url.Action("Index","Payment", new { pageNumber = i }))">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Payment", new { pageNumber = i }))">@i</a></li>
+                }
+            }
+            <li class="page-item @nextDisabled">
+                <a class="page-link" href="@(Url.Action("Index", "Payment", new { pageNumber =  PaginatedList<PaymentViewModel>.PageIndex + 1}))" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>

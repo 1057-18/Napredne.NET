@@ -1,21 +1,19 @@
 ﻿<Properties StartupConfiguration="{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}|Default">
   <MonoDevelop.Ide.ItemProperties.EmploymentWebApp PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="EmploymentWebApp/Controllers/PaymentController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmploymentWebApp/Views/Employee/Index.cshtml">
     <Files>
-      <File FileName="EmploymentWebApp/Controllers/EmployeeController.cs" Line="20" Column="9" />
-      <File FileName="EmploymentWebApp/Controllers/PaymentController.cs" Line="17" Column="66" />
+      <File FileName="EmploymentWebApp/Views/Employee/Index.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="EmploymentWebApp" expanded="True">
-            <Node name="BusinessLogicLayer" expanded="True">
-              <Node name="Implementation" expanded="True" />
-              <Node name="Interface" expanded="True" />
-            </Node>
             <Node name="EmploymentWebApp" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="PaymentController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Employee" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
@@ -23,7 +21,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.BusinessLogicLayer FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

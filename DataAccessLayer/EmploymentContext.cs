@@ -12,7 +12,7 @@ namespace DataAccessLayer
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Payment> Payments { get; set; }
 
-        // kada zelimo da injectujemo conn string iz app settings potrebno je napraviti konstruktor naseg contexta
+        // injectujemo conn string iz app settings, napraviti konstruktor naseg contexta
         // koji ce da prima te opcije i salje konstruktoru DbContext klase
         public EmploymentContext(DbContextOptions<EmploymentContext> options) : base(options)
         {

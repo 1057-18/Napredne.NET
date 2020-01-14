@@ -39,9 +39,18 @@
                     <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Are you sure you want to make changes to this record?')"><i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
                 }
             </form>
-            <form method="get" style="padding-top: 10px">
-                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
-            </form>
+            @if (Model.HeaderString == "Add")
+            {
+                <form method="get" style="padding-top: 10px">
+                    <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fas fa-table"></i>&nbsp;&nbsp;&nbsp;Back To Details</button>
+                </form>
+            }
+            else
+            {
+                <form method="post" style="padding-top: 10px">
+                    <button class="btn btn-secondary btn-block" asp-action="Details" asp-route-id="@Model.PaymentForm.Id"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back To Details</button>
+                </form>
+            }
         </div>
         <div class="col">
         </div>

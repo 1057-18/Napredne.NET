@@ -2935,8 +2935,8 @@ a.btn.disabled, fieldset:disabled a.btn {
 
     .btn-outline-dark:hover {
         color: #fff;
-        background-color: #bcc955;
-        border-color: #bcc955
+        background-color: #bcc953;
+        border-color: #bcc953
     }
 
     .btn-outline-dark.focus, .btn-outline-dark:focus {
@@ -4791,19 +4791,22 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     position: relative;
     display: block;
     padding: .5rem .75rem;
-    margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
+    color: #212529;
     background-color: #fff;
-    border: 1px solid #dee2e6
+    border: none;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem
 }
 
     .page-link:hover {
         z-index: 2;
-        color: #0056b3;
+        color: #212529;
         text-decoration: none;
-        background-color: #e9ecef;
-        border-color: #dee2e6
+        background-color: rgba(0,0,0,.075);
+        border-color: rgba(0,0,0,.075)
     }
 
     .page-link:focus {
@@ -4813,21 +4816,18 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     }
 
 .page-item:first-child .page-link {
-    margin-left: 0;
-    border-top-left-radius: .25rem;
-    border-bottom-left-radius: .25rem
+    margin-left: 0
 }
 
 .page-item:last-child .page-link {
-    border-top-right-radius: .25rem;
-    border-bottom-right-radius: .25rem
+    
 }
 
 .page-item.active .page-link {
     z-index: 1;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff
+    background-color: #bcc953;
+    border-color: #e6ebbe
 }
 
 .page-item.disabled .page-link {
@@ -4839,8 +4839,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .pagination-lg .page-link {
-    padding: .75rem 1.5rem;
-    font-size: 1.25rem;
+    padding: .6rem 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.5
 }
 

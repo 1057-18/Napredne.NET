@@ -24,9 +24,9 @@ namespace EmploymentWebApp.Models
             _departmentsService = departmentsService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? pageNumber)
         {
-            return View(PrepareForView(_paymentService.GetAll().ToList()));
+            return View(PaginatedList<PaymentViewModel>.Create(PrepareForView(_paymentService.GetAll().ToList()), pageNumber ?? 1, 8));
         }
         
         public IActionResult AddOrEdit(int id = 0)
