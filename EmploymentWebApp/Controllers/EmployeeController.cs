@@ -29,9 +29,29 @@ namespace EmploymentWebApp.Controllers
             _departmentsService = departmentsService;
         }
 
-        public IActionResult Index(int? pageNumber)
+        public IActionResult Index(string sortOrder, int? pageNumber)
         {
-            return View(PaginatedList<EmployeeViewModel>.Create(PrepareForView(_employeeService.GetAll().ToList()), pageNumber ?? 1, 8));
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            List<Employee> list = _employeeService.GetAll().ToList();
+            switch (sortOrder)
+            {
+                case "Name":
+                    list = list.OrderBy(e => e.LastName).ToList();
+                    break;
+                case "name_desc":
+                    list = list.OrderByDescending(e => e.LastName).ToList();
+                    break;
+                case "Date":
+                    list = list.OrderBy(e => e.DateOfHire).ToList();
+                    break;
+                case "date_desc":
+                    list = list.OrderByDescending(e => e.DateOfHire).ToList();
+                    break;
+                default:
+                    break;
+            }
+            return View(PaginatedList<EmployeeViewModel>.Create(PrepareForView(list), pageNumber ?? 1, 8, sortOrder));
         }
 
         public IActionResult AddOrEdit(int id = 0)
