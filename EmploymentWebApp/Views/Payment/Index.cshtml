@@ -13,28 +13,28 @@
                 <th scope="col">Payment Type</th>
                 @if (PaginatedList<PaymentViewModel>.SortOrder == "Date")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["DateSortParm"], state = true })">Date<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
                 }
                 else if (PaginatedList<PaymentViewModel>.SortOrder == "date_desc")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["DateSortParm"], state = true })">Date<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
                 }
                 else
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["DateSortParm"], state = true })">Date<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
                 }
                 <th scope="col">Time</th>
                 @if (PaginatedList<PaymentViewModel>.SortOrder == "Amount")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["AmountSortParm"]">Amount<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["AmountSortParm"], state = true })">Amount<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
                 }
                 else if (PaginatedList<PaymentViewModel>.SortOrder == "amount_desc")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["AmountSortParm"]">Amount<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["AmountSortParm"], state = true })">Amount<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
                 }
                 else
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["AmountSortParm"]">Amount<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Payment", new { sortOrder = @ViewData["AmountSortParm"], state = true })">Amount<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
                 }
             </tr>
         </thead>
@@ -44,7 +44,7 @@
                 <tr onclick="location.href = '@(Url.Action("Details", "Payment", new { id = paymentViewModel.PaymentForm.Id }))'">
                     <th scope="row">@paymentViewModel.PaymentForm.Id</th>
                     <td>@(paymentViewModel.PaymentForm.Employee.FirstName + " " + paymentViewModel.PaymentForm.Employee.LastName)</td>
-                    <td>@paymentViewModel.PaymentForm.PaymentType</td>
+                    <td>@paymentViewModel.StringPaymentType</td>
                     <td>@paymentViewModel.StringDate</td>
                     <td>@paymentViewModel.StringTime</td>
                     <td>@paymentViewModel.StringAmount</td>
@@ -64,7 +64,7 @@
     <nav aria-label="Page navigation" style="padding-top: 15px">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item @prevDisabled">
-                <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex - 1}))" aria-label="Previous">
+                <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex - 1, state = true }))" aria-label="Previous">
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </li>
@@ -72,15 +72,15 @@
             {
                 if (PaginatedList<PaymentViewModel>.PageIndex == i)
                 {
-                    <li class="page-item active"><a class="page-link" style="background-color: #cf8f5f" href="@(Url.Action("Index","Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber = i }))">@i</a></li>
+                    <li class="page-item active"><a class="page-link" style="background-color: #cf8f5f" href="@(Url.Action("Index","Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber = i, state = true }))">@i</a></li>
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber = i }))">@i</a></li>
+                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber = i, state = true }))">@i</a></li>
                 }
             }
             <li class="page-item @nextDisabled">
-                <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex + 1}))" aria-label="Next">
+                <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex + 1, state = true }))" aria-label="Next">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </li>
@@ -98,16 +98,27 @@
                 </h5>
             </div>
             <div class="modal-body" style="text-align: center; padding-left: 60px; padding-right: 60px;">
-                <from id="paymentFilter" runat="server">
+                <form method="post" asp-action="Index" style="padding-top: 20px; padding-bottom: 30px">
                     Amount : <span id="spanOutputAmount"></span>
                     <br /><br />
                     <div id="sliderAmount"></div>
-                    <input type="hidden" id="txtMinAmo" />
-                    <input type="hidden" id="txtMaxAmo" />
-                </from>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning">Apply</button>
+                    <input type="hidden" id="txtMinAmo" name="minAmo"/>
+                    <input type="hidden" id="txtMaxAmo" name="maxAmo"/>
+                    <input type="hidden" name="filter" value="true" />
+                    <input type="hidden" name="state" value="true" />
+                    <input type="hidden" name="sortOrder" value="@ViewData["CurrentSortOrder"]" />
+                    <br />
+                    <label style="padding-top: 10px">Payment Type :</label>
+                    <br />
+                    <div style="text-align: left; padding-left: 50px; padding-top: 8px; padding-bottom: 10px">
+                        @foreach (PaymentTypeViewModel p in ViewData["PaymentTypes"] as List<PaymentTypeViewModel>)
+                        {
+                            <input type="checkbox" name="AreChecked" value="@p.PaymentType" checked="@p.IsChecked" />
+                            <label>&nbsp;&nbsp;@p.StringPaymentType</label><br />
+                        }
+                    </div><br />
+                    <button type="submit" class="btn btn-warning" style="width: 160px"><i class="fas fa-sliders-h"></i>&nbsp;&nbsp;Apply</button>
+                </form>
             </div>
         </div>
     </div>

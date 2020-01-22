@@ -25,7 +25,7 @@ namespace EmploymentWebApp.Models
         [Required(ErrorMessage = " must be selected.")]
         public string StringPaymentType { get; set; }
         public string HeaderString { get; set; }
-        public List<string> PaymentTypes { get; set; } = Enum.GetNames(typeof(PaymentType)).ToList();
+        public List<string> PaymentTypes { get; set; } = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().ToList().Select(e => e.GetDescription()).ToList();
 
         public PaymentViewModel()
         {

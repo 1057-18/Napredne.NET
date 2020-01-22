@@ -64,8 +64,8 @@ namespace EmploymentWebApp.Controllers
             }
             else
             {
-                ViewData["SliderOneValue"] = maxYears / 3;
-                ViewData["SliderTwoValue"] = maxYears / 3 * 2;
+                ViewData["SliderOneValue"] = 0;
+                ViewData["SliderTwoValue"] = maxYears;
                 filterChecked = _departmentsService.GetAll().Select(d => d.Id).ToList();
                 filterMin = 0;
                 filterMax = (DateTime.Now - _employeeService.GetAll().ToList().Min(e => e.DateOfHire)).Days / 365;

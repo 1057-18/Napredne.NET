@@ -7,6 +7,13 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+*:focus {
+    outline: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 /* Provide sufficient contrast against white background */
 .btn-primary {
     color: #fff;

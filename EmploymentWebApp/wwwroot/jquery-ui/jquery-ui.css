@@ -377,7 +377,7 @@ button.ui-button::-moz-focus-inner {
 }
 
 .ui-checkboxradio-label .ui-icon-background {
-	box-shadow: inset 1px 1px 1px #ccc;
+	box-shadow: inset 1px 1px 1px #ffffff;
 	border-radius: .12em;
 	border: none;
 }
@@ -972,7 +972,7 @@ a.ui-button:focus {
 }
 
 .ui-visual-focus {
-	box-shadow: 0 0 3px 1px rgb(94, 158, 214);
+	box-shadow: 0 0 3px 1px rgb(255,255,255);
 }
 .ui-state-active,
 .ui-widget-content .ui-state-active,
@@ -1307,6 +1307,6 @@ a.ui-button:active,
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-widget-shadow {
-	-webkit-box-shadow: 0px 0px 5px #666666;
-	box-shadow: 0px 0px 5px #666666;
+	-webkit-box-shadow: 0px 0px 5px #ffffff;
+	box-shadow: 0px 0px 5px #ffffff;
 }

@@ -79,9 +79,9 @@
 
             sliderDiv.slider({
                 range: true,
-                min: 0,
-                max: 30000,
-                values: [10000, 20000],
+                min: @ViewData["FilterMinAmo"],
+                max: @ViewData["FilterMaxAmo"],
+                values: [@ViewData["FirstSliderValue"], @ViewData["SecondSliderValue"]],
                 slide: function (event, ui) {
                     outputSpan.html(ui.values[0] + ' - ' + ui.values[1] + ' $');
                     $('#txtMinAmo').val(ui.values[0]);

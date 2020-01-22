@@ -1,23 +1,18 @@
 ﻿<Properties StartupConfiguration="{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}|Default">
   <MonoDevelop.Ide.ItemProperties.EmploymentWebApp PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="EmploymentWebApp/Views/Payment/Index.cshtml">
-    <Files>
-      <File FileName="EmploymentWebApp/Controllers/PaymentController.cs" Line="112" Column="10" />
-      <File FileName="EmploymentWebApp/Views/Payment/Index.cshtml" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="EmploymentWebApp" expanded="True">
-            <Node name="DataAccessLayer" expanded="True">
-              <Node name="Models" expanded="True" />
-            </Node>
             <Node name="EmploymentWebApp" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="EmployeeController.cs" selected="True" />
+              </Node>
               <Node name="Views" expanded="True">
-                <Node name="Payment" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
+                <Node name="Employee" expanded="True" />
+                <Node name="Payment" expanded="True" />
+                <Node name="Shared" expanded="True" />
               </Node>
             </Node>
           </Node>

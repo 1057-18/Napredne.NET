@@ -16,6 +16,9 @@ namespace EmploymentWebApp.Models
         private readonly IPaymentService _paymentService;
         private readonly IDepartmentsService _departmentsService;
         private static int _idEditedPayment = 0;
+        private static List<PaymentType> filterChecked;
+        private static int filterMin;
+        private static int filterMax;
 
         public PaymentController(IEmployeeService employeeService, IPaymentService paymentService, IDepartmentsService departmentsService)
         {
@@ -24,11 +27,40 @@ namespace EmploymentWebApp.Models
             _departmentsService = departmentsService;
         }
 
-        public IActionResult Index(string sortOrder, int? pageNumber)
+        public IActionResult Index(string sortOrder, int? pageNumber, int minAmo, int maxAmo, List<PaymentType> AreChecked, bool filter = false, bool state = false)
         {
+            ViewData["FilterMinAmo"] = 0;
+            ViewData["FilterMaxAmo"] = 30000;
+            ViewData["CurrentSortOrder"] = sortOrder;
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["AmountSortParm"] = sortOrder == "Amount" ? "amount_desc" : "Amount";
             List<Payment> list = _paymentService.GetAll().ToList();
+            List<PaymentTypeViewModel> paymentTypeViewModels = GetPaymentTypeViewModels();
+            if (filter)
+            {
+                filterChecked = AreChecked;
+                filterMin = minAmo;
+                filterMax = maxAmo;
+            }
+            if (state)
+            {
+                ViewData["FirstSliderValue"] = filterMin;
+                ViewData["SecondSliderValue"] = filterMax;
+                paymentTypeViewModels = FilterSelectedPaymentTypes(filterChecked, paymentTypeViewModels);
+                list = FilterPayments(filterMin, filterMax, paymentTypeViewModels, list);
+                if (filterChecked.Count == 0 || filterChecked.Count == Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().ToList().Count)
+                {
+                    paymentTypeViewModels.ForEach(d => d.IsChecked = false);
+                }
+            }
+            else
+            {
+                filterMin = 0;
+                filterMax = 30000;
+                ViewData["FirstSliderValue"] = filterMin;
+                ViewData["SecondSliderValue"] = filterMax;
+                filterChecked = Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().ToList();
+            }
             switch (sortOrder)
             {
                 case "Date":
@@ -46,6 +78,7 @@ namespace EmploymentWebApp.Models
                 default:
                     break;
             }
+            ViewData["PaymentTypes"] = paymentTypeViewModels;
             return View(PaginatedList<PaymentViewModel>.Create(PrepareForView(list), pageNumber ?? 1, 8, sortOrder));
         }
         
@@ -116,7 +149,7 @@ namespace EmploymentWebApp.Models
             Payment payment = paymentViewModel.PaymentForm;
             payment.Amount = ParseAmount(paymentViewModel.StringAmount);
             payment.DateAndTime = DateTime.Now;
-            payment.PaymentType = Enum.Parse<PaymentType>(paymentViewModel.StringPaymentType);
+            payment.PaymentType = DescriptionToEnum(paymentViewModel.StringPaymentType);
             return payment;
         }
 
@@ -142,6 +175,47 @@ namespace EmploymentWebApp.Models
         private string AmountToString(double amount)
         {
             return amount.ToString("N2", CultureInfo.CreateSpecificCulture("es-ES"));
+        }
+
+        private PaymentType DescriptionToEnum(string description)
+        {
+            return Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().ToList().Find(p => p.GetDescription() == description);
+        }
+
+        private List<PaymentTypeViewModel> GetPaymentTypeViewModels()
+        {
+            List<PaymentTypeViewModel> result = new List<PaymentTypeViewModel>();
+            foreach (PaymentType paymentType in Enum.GetValues(typeof(PaymentType)).Cast<PaymentType>().ToList())
+            {
+                PaymentTypeViewModel paymentTypeViewModel = new PaymentTypeViewModel();
+                paymentTypeViewModel.PaymentType = paymentType;
+                paymentTypeViewModel.StringPaymentType = paymentType.GetDescription();
+                result.Add(paymentTypeViewModel);
+            }
+            return result;
+        }
+
+        public List<Payment> FilterPayments(int minNum, int maxNum, List<PaymentTypeViewModel> paymentTypeViewModels, List<Payment> list)
+        {
+            paymentTypeViewModels = paymentTypeViewModels.Where(p => p.IsChecked == true).ToList();
+            list = list.Where(e => paymentTypeViewModels.Any(p => p.PaymentType == e.PaymentType) && e.Amount >= minNum && e.Amount <= maxNum).ToList();
+            return list;
+        }
+
+        public List<PaymentTypeViewModel> FilterSelectedPaymentTypes(List<PaymentType> AreChecked, List<PaymentTypeViewModel> paymentTypeViewModels)
+        {
+            if (AreChecked.Count == 0)
+            {
+                paymentTypeViewModels.ForEach(d => d.IsChecked = true);
+            }
+            else
+            {
+                foreach (PaymentType s in AreChecked)
+                {
+                    paymentTypeViewModels.Find(p => p.PaymentType == s).IsChecked = true;
+                }
+            }
+            return paymentTypeViewModels;
         }
     }
 }
