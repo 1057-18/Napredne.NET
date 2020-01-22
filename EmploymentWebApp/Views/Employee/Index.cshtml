@@ -1,10 +1,11 @@
 ﻿@model PaginatedList<EmployeeViewModel>
+@using DataAccessLayer.Models
 @{
     ViewData["Title"] = "Employee Register";
 }
 
 <div class="container-fluid" style="text-align: center">
-    <h4>Employee Register</h4><br /><br />
+    <h4>Employee Register <button type="button" id="filterButton" class="btn btn-outline-dark" data-toggle="modal" data-target="#employeeFilter"><i class="fas fa-layer-group"></i></button></h4><br /><br />
     <table class="table table-hover table-responsive-sm" style="border-bottom: 1px solid #dee2e6">
         <thead class="table-info">
             <tr onclick="location.href='@Url.Action("Index", "Employee")'">
@@ -12,29 +13,29 @@
                 <th scope="col">First Name</th>
                 @if (PaginatedList<EmployeeViewModel>.SortOrder == "Name")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Last Name<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Employee", new { sortOrder = @ViewData["NameSortParm"], state = true })">Last Name<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
                 }
                 else if (PaginatedList<EmployeeViewModel>.SortOrder == "name_desc")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Last Name<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Employee", new { sortOrder = @ViewData["NameSortParm"], state = true })">Last Name<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
                 }
                 else
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">Last Name<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index","Employee", new { sortOrder = @ViewData["NameSortParm"], state = true })">Last Name<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
                 }
                 <th scope="col">Job Title</th>
                 <th scope="col">Department</th>
                 @if (PaginatedList<EmployeeViewModel>.SortOrder == "Date")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date Of Hire<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index", "Employee", new { sortOrder = ViewData["DateSortParm"], state = true })">Date Of Hire<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
                 }
                 else if (PaginatedList<EmployeeViewModel>.SortOrder == "date_desc")
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date Of Hire<i class="fas fa-sort-up" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index", "Employee", new { sortOrder = ViewData["DateSortParm"], state = true })">Date Of Hire<i class="fas fa-sort-down" style="padding-left: 5px"></i></a></th>
                 }
                 else
                 {
-                    <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Date Of Hire<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
+                    <th scope="col"><a href="@Url.Action("Index", "Employee", new { sortOrder = ViewData["DateSortParm"], state = true })">Date Of Hire<i class="fas fa-sort" style="padding-left: 5px"></i></a></th>
                 }
             </tr>
         </thead>
@@ -64,7 +65,7 @@
     <nav aria-label="Page navigation" style="padding-top: 15px">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item @prevDisabled">
-                <a class="page-link" href="@(Url.Action("Index", "Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex - 1}))" aria-label="Previous">
+                <a class="page-link" href="@(Url.Action("Index", "Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex - 1, state = true }))" aria-label="Previous">
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </li>
@@ -72,15 +73,15 @@
             {
                 if (PaginatedList<EmployeeViewModel>.PageIndex == i)
                 {
-                    <li class="page-item active"><a class="page-link" href="@(Url.Action("Index","Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber = i }))">@i</a></li>
+                    <li class="page-item active"><a class="page-link" href="@(Url.Action("Index","Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber = i, state = true }))">@i</a></li>
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber = i }))">@i</a></li>
+                    <li class="page-item"><a class="page-link" href="@(Url.Action("Index","Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber = i, state = true }))">@i</a></li>
                 }
             }
             <li class="page-item @nextDisabled">
-                <a class="page-link" href="@(Url.Action("Index", "Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex + 1}))" aria-label="Next">
+                <a class="page-link" href="@(Url.Action("Index", "Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex + 1, state = true }))" aria-label="Next">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </li>
@@ -88,3 +89,38 @@
     </nav>
 </div>
 
+<!-- Modal -->
+<div class="modal" id="employeeFilter" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" style="padding-left: 212px">
+                    Filter
+                </h5>
+            </div>
+            <div class="modal-body" style="text-align: center; padding-left: 60px; padding-right: 60px;">
+                <form method="post" asp-action="Index" style="padding-top: 20px; padding-bottom: 30px">
+                    <label>Years Of Service :&nbsp;</label><span id="spanOutputAge"></span>
+                    <br /><br />
+                    <div id="sliderAge"></div>
+                    <input type="hidden" id="txtMinAge" name="minNum"/>
+                    <input type="hidden" id="txtMaxAge" name="maxNum"/>
+                    <input type="hidden" name="filter" value="true" />
+                    <input type="hidden" name="state" value="true" />
+                    <input type="hidden" name="sortOrder" value="@ViewData["CurrentSortOrder"]" />
+                    <br />
+                    <label style="padding-top: 10px">Department :</label>
+                    <br />
+                    <div style="text-align: left; padding-left: 50px; padding-top: 8px; padding-bottom: 10px">
+                        @foreach (DepartmentViewModel d in ViewData["Departments"] as List<DepartmentViewModel>)
+                        {
+                            <input type="checkbox" name="AreChecked" value="@d.Department.Id" checked="@d.IsChecked"/>
+                            <label>&nbsp;&nbsp;@d.Department.Name</label><br />
+                        }
+                    </div><br />
+                    <button type="submit" class="btn btn-info" style="width: 160px"><i class="fas fa-sliders-h"></i>&nbsp;&nbsp;Apply</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

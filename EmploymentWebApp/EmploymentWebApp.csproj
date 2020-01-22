@@ -22,6 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Home\Privacy.cshtml" />
+    <Content Remove="wwwroot\jquery-ui\jquery-ui.min.js" />
+    <Content Remove="wwwroot\jquery-ui\jquery-ui.min.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\lib\jquery\dist\jquery.js">

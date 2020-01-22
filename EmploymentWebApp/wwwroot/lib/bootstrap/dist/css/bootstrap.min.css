@@ -2808,8 +2808,8 @@ a.btn.disabled, fieldset:disabled a.btn {
         }
 
 .btn-outline-info {
-    color: #17a2b8;
-    border-color: #17a2b8
+    color: #212529;
+    border: none
 }
 
     .btn-outline-info:hover {
@@ -2899,7 +2899,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-outline-light {
     color: #212529;
-    border-color: #f8f9fa
+    border: none
 }
 
     .btn-outline-light:hover {
@@ -2909,7 +2909,7 @@ a.btn.disabled, fieldset:disabled a.btn {
     }
 
     .btn-outline-light.focus, .btn-outline-light:focus {
-        box-shadow: 0 0 0 .2rem rgba(248,249,250,.5)
+        box-shadow: 0 0 0 .2rem rgba(255,255,255,.5)
     }
 
     .btn-outline-light.disabled, .btn-outline-light:disabled {
@@ -2924,12 +2924,12 @@ a.btn.disabled, fieldset:disabled a.btn {
     }
 
         .btn-outline-light:not(:disabled):not(.disabled).active:focus, .btn-outline-light:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-light.dropdown-toggle:focus {
-            box-shadow: 0 0 0 .2rem rgba(248,249,250,.5)
+            box-shadow: 0 0 0 .2rem rgba(255,255,255,.5)
         }
 
 .btn-outline-dark {
     color: #212529;
-    border-color: #bee5eb
+    border: none
 }
 
     .btn-outline-dark:hover {
@@ -2939,7 +2939,7 @@ a.btn.disabled, fieldset:disabled a.btn {
     }
 
     .btn-outline-dark.focus, .btn-outline-dark:focus {
-        box-shadow: 0 0 0 .2rem rgba(52,58,64,.5)
+        box-shadow: 0 0 0 .2rem rgba(255,255,255,.5)
     }
 
     .btn-outline-dark.disabled, .btn-outline-dark:disabled {
@@ -2954,7 +2954,7 @@ a.btn.disabled, fieldset:disabled a.btn {
     }
 
         .btn-outline-dark:not(:disabled):not(.disabled).active:focus, .btn-outline-dark:not(:disabled):not(.disabled):active:focus, .show > .btn-outline-dark.dropdown-toggle:focus {
-            box-shadow: 0 0 0 .2rem rgba(52,58,64,.5)
+            box-shadow: 0 0 0 .2rem rgba(255,255,255,.5)
         }
 
 .btn-link {
@@ -5806,7 +5806,6 @@ a.close.disabled {
 
 .modal-header {
     display: -ms-flexbox;
-    display: flex;
     -ms-flex-align: start;
     align-items: flex-start;
     -ms-flex-pack: justify;
@@ -5836,8 +5835,8 @@ a.close.disabled {
 
 .modal-footer {
     display: -ms-flexbox;
-    display: flex;
     -ms-flex-align: center;
+    text-align: center;
     align-items: center;
     -ms-flex-pack: end;
     justify-content: flex-end;

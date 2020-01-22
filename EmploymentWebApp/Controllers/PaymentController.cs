@@ -107,7 +107,7 @@ namespace EmploymentWebApp.Models
                 StringAmount = AmountToString(payment.Amount),
                 StringDate = date,
                 StringTime = time,
-                StringPaymentType = payment.PaymentType.ToString()
+                StringPaymentType = payment.PaymentType.GetDescription()
             };
         }
 

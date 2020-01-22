@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EmploymentWebApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/jquery-ui/jquery-ui.css" />
 </head>
 <body>
     <header>
@@ -37,11 +37,10 @@
         </nav>
     </header>
     <div class="container-fluid" style="padding-top: 46px; padding-bottom: 20px; width: 90%">
-            <main role="main">
-                @RenderBody()
-            </main>
+        <main role="main">
+            @RenderBody()
+        </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2020 - Fakultet Organizacionih Nauka
@@ -50,6 +49,51 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/jquery-ui/jquery-ui.js"></script>
+    <script>$(document).ready(function () {
+            var outputSpan = $('#spanOutputAge');
+            var sliderDiv = $('#sliderAge');
+
+            sliderDiv.slider({
+                range: true,
+                min: @ViewData["FilterMinNum"],
+                max: @ViewData["FilterMaxNum"],
+                values: [@ViewData["SliderOneValue"], @ViewData["SliderTwoValue"]],
+                slide: function (event, ui) {
+                    outputSpan.html(ui.values[0] + ' - ' + ui.values[1] + ' Years');
+                },
+                stop: function (event, ui) {
+                    $('#txtMinAge').val(ui.values[0]);
+                    $('#txtMaxAge').val(ui.values[1]);
+                }
+            });
+
+            outputSpan.html(sliderDiv.slider('values', 0) + ' - '
+                + sliderDiv.slider('values', 1) + ' Years');
+            $('#txtMinAge').val(sliderDiv.slider('values', 0));
+            $('#txtMaxAge').val(sliderDiv.slider('values', 1));
+        });</script>
+    <script>$(document).ready(function () {
+            var outputSpan = $('#spanOutputAmount');
+            var sliderDiv = $('#sliderAmount');
+
+            sliderDiv.slider({
+                range: true,
+                min: 0,
+                max: 30000,
+                values: [10000, 20000],
+                slide: function (event, ui) {
+                    outputSpan.html(ui.values[0] + ' - ' + ui.values[1] + ' $');
+                    $('#txtMinAmo').val(ui.values[0]);
+                    $('#txtMaxAmo').val(ui.values[1]);
+                }
+            });
+
+            outputSpan.html(sliderDiv.slider('values', 0) + ' - '
+                + sliderDiv.slider('values', 1) + ' $');
+            $('#txtMinAmo').val(sliderDiv.slider('values', 0));
+            $('#txtMaxAmo').val(sliderDiv.slider('values', 1));
+        });</script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
