@@ -10,7 +10,7 @@
             <h4>Employee @Model.HeaderString</h4>
         </div>
         <div class="col">
-            <form method="post" asp-action="Save">
+            <form method="post" asp-action="Save" style="padding-top: 24px">
                 <label>First Name</label><span asp-validation-for="EmployeeForm.FirstName" class="text-danger"></span>
                 <input class="form-control" type="text" asp-for="EmployeeForm.FirstName" />
                 <br />

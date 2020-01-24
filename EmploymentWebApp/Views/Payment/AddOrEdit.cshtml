@@ -10,7 +10,7 @@
             <h4>Payment @Model.HeaderString</h4>
         </div>
         <div class="col">
-            <form method="post" asp-action="Save">
+            <form method="post" asp-action="Save" style="padding-top: 36px">
                 <label>Employee ID</label><span asp-validation-for="PaymentForm.EmployeeId" class="text-danger"></span>
                 <input class="form-control" type="text" asp-for="PaymentForm.EmployeeId" />
                 <br />

@@ -35,6 +35,9 @@ namespace EmploymentWebApp
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IDepartmentsService, DepartmentService>();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +57,8 @@ namespace EmploymentWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 

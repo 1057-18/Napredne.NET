@@ -11,6 +11,7 @@ using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using DataAccessLayer.Repository;
 using BusinessLogicLayer.Interface;
+using Microsoft.AspNetCore.Http;
 
 namespace EmploymentWebApp.Controllers
 {
@@ -34,10 +35,17 @@ namespace EmploymentWebApp.Controllers
             return View();
         }
 
+        public IActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+            return View("SignIn");
+        }
+
         public IActionResult Validate(string username, string password)
         {
             if (username != null)
             {
+                HttpContext.Session.SetString("SignIn", "success");
                 return RedirectToAction("Index");
             }
             else
@@ -46,8 +54,14 @@ namespace EmploymentWebApp.Controllers
             }
         }
 
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             List<Employee> employees = _employeeService.GetAll().ToList();
             ViewBag.NumberOfEmployees = employees.Count();
 
@@ -93,21 +107,6 @@ namespace EmploymentWebApp.Controllers
             ViewBag.NumberOfDepartmentEmployees = numberOfDepartmentEmp;
             
             return View();
-        }
-
-        public IActionResult Employee()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Save()
-        {
-            return View("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

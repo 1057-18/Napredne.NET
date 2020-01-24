@@ -11,8 +11,8 @@ using DataAccessLayer;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using EmploymentWebApp.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,6 +37,11 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult Index(string sortOrder, int? pageNumber, int minNum, int maxNum, List<int> AreChecked, bool filter = false, bool state = false)
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             int maxYears = (int)(DateTime.Now - _employeeService.GetAll().ToList().Min(e => e.DateOfHire)).Days / 365;
             ViewData["FilterMinNum"] = 0;
             ViewData["FilterMaxNum"] = maxYears;
@@ -94,6 +99,11 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult AddOrEdit(int id = 0)
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             if (id == 0)
             {
                 return View(new EmployeeViewModel() { HeaderString = "Add", DepartmentList = _departmentsService.GetAll().ToList() });
@@ -110,6 +120,11 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult Details(int id)
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             return View(EmployeeToEmployeeViewModel(_employeeService.Get(id)));
         }
 

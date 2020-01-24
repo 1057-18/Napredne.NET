@@ -53,3 +53,5 @@
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/BusinessLogicLayer.dll
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/BusinessLogicLayer.pdb
 /Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/obj/Debug/netcoreapp3.0/Razor/Views/Home/SignIn.cshtml.g.cs
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/System.Security.Cryptography.Pkcs.dll
+/Users/jovanbubonja/Desktop/Employment WebApp/EmploymentWebApp/bin/Debug/netcoreapp3.0/runtimes/win/lib/netcoreapp2.1/System.Security.Cryptography.Pkcs.dll

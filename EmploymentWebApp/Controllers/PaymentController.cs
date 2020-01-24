@@ -7,6 +7,7 @@ using BusinessLogicLayer.Interface;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace EmploymentWebApp.Models
 {
@@ -29,6 +30,11 @@ namespace EmploymentWebApp.Models
 
         public IActionResult Index(string sortOrder, int? pageNumber, int minAmo, int maxAmo, List<PaymentType> AreChecked, bool filter = false, bool state = false)
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             ViewData["FilterMinAmo"] = 0;
             ViewData["FilterMaxAmo"] = 30000;
             ViewData["CurrentSortOrder"] = sortOrder;
@@ -84,7 +90,12 @@ namespace EmploymentWebApp.Models
         
         public IActionResult AddOrEdit(int id = 0)
         {
-            if(id == 0)
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
+            if (id == 0)
             {
                 return View(new PaymentViewModel() { HeaderString = "Add" }); ;
             }
@@ -100,6 +111,11 @@ namespace EmploymentWebApp.Models
 
         public IActionResult Details(int id)
         {
+            if (HttpContext.Session.Get("SignIn") == null)
+            {
+                return RedirectToAction("SignIn", "Home");
+            }
+
             return View(PaymentToPaymentViewModel(_paymentService.Get(id)));
         }
 
