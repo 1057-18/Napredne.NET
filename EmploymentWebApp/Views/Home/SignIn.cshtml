@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EmploymentWebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/jquery-ui/jquery-ui.css" />
+</head>
+<body>
+    <div class="container" style="width: 300px; text-align: center">
+        <h1 class="display-4" style="padding-top: 200px">Sign In</h1><br />
+        <form method="get" asp-action="Validate">
+            <input type="text" name="username" class="form-control" placeholder="Username"/><br />
+            <input type="password" name="password" class="form-control" placeholder="Password"/><br /><br />
+            <input type="submit" value="Sign In" class="btn btn-secondary" style="width: 160px"/>
+        </form>
+    </div>
+</body>
+</html>

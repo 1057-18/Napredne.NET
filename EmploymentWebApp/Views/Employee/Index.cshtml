@@ -62,7 +62,7 @@
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
-    <nav aria-label="Page navigation" style="padding-top: 15px">
+    <nav class="fixed-bottom" aria-label="Page navigation" style="padding-top: 15px; padding-bottom: 78px">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item @prevDisabled">
                 <a class="page-link" href="@(Url.Action("Index", "Employee", new { sortOrder = PaginatedList<EmployeeViewModel>.SortOrder, pageNumber =  PaginatedList<EmployeeViewModel>.PageIndex - 1, state = true }))" aria-label="Previous">

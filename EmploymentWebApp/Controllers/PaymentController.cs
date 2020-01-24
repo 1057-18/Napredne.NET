@@ -79,7 +79,7 @@ namespace EmploymentWebApp.Models
                     break;
             }
             ViewData["PaymentTypes"] = paymentTypeViewModels;
-            return View(PaginatedList<PaymentViewModel>.Create(PrepareForView(list), pageNumber ?? 1, 8, sortOrder));
+            return View(PaginatedList<PaymentViewModel>.Create(PrepareForView(list), pageNumber ?? 1, 9, sortOrder));
         }
         
         public IActionResult AddOrEdit(int id = 0)

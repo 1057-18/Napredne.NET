@@ -5,7 +5,7 @@
 
 <div class="container-fluid" style="text-align: center">
     <h4>Payment Register <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#paymentFilter"><i class="fas fa-layer-group"></i></button></h4><br /><br />
-    <table class="table table-hover table-responsive-sm">
+    <table class="table table-hover table-responsive-sm" style="border-bottom: 1px solid #dee2e6">
         <thead class="table-warning">
             <tr onclick="location.href='@Url.Action("Index", "Payment")'">
                 <th scope="col"><a asp-action="AddOrEdit" class="btn btn-outline-light" style="font-weight: bold; border: none;"><i class="far fa-plus-square"></i> Payment</a></th>
@@ -61,7 +61,7 @@
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
-    <nav aria-label="Page navigation" style="padding-top: 15px">
+    <nav class="fixed-bottom" aria-label="Page navigation" style="padding-top: 15px; padding-bottom: 78px">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item @prevDisabled">
                 <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex - 1, state = true }))" aria-label="Previous">

@@ -2,7 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="text-center">
-        <br /><br /><br /><br /><br /><br />
-        <h1 class="display-4">Welcome</h1>
+<div class="container">
+    <div class="row">
+        <div class="col" style="height: 280px; width: 300px">
+            <canvas id="doughnutChart"></canvas>
+        </div>
+        <div class="col">
+            <label style="font-size: 2.1rem; padding-top: 130px; padding-left: 64px">Total employee count : @ViewBag.NumberOfEmployees</label>
+        </div>
     </div>
+    <div class="row" style="padding-top: 45px">
+        <div class="col">
+            <label style="font-size: 2.1rem; padding-top: 116px; padding-left: 24px">Year payment sum : @ViewBag.YearPaymentSum</label>
+        </div>
+        <div class="col" style="height: 280px; width: 300px">
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+</div>
