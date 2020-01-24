@@ -15,6 +15,7 @@ namespace DataAccessLayer.Repository
             Employees = new EmployeeRepository(_context);
             Payments = new PaymentRepository(_context);
             Departments = new DepartmentRepository(_context);
+            Credentials = new CredentialRepository(_context);
         }
 
         public IEmployeeRepository Employees { get; private set; }
@@ -22,6 +23,8 @@ namespace DataAccessLayer.Repository
         public IPaymentRepository Payments { get; private set; }
 
         public IDepartmentRepository Departments { get; private set; }
+
+        public ICredentialRepository Credentials { get; private set; }
 
         public int Complete()
         {

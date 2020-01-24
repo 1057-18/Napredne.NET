@@ -21,10 +21,12 @@ namespace EmploymentWebApp.Controllers
         private readonly IEmployeeService _employeeService;
         private readonly IPaymentService _paymentService;
         private readonly IDepartmentsService _departmentsService;
+        private readonly ICredentialService _credentialService;
 
-        public HomeController(ILogger<HomeController> logger, IEmployeeService employeeService, IPaymentService paymentService, IDepartmentsService departmentsService)
+        public HomeController(ILogger<HomeController> logger, IEmployeeService employeeService, IPaymentService paymentService, IDepartmentsService departmentsService, ICredentialService credentialService)
         {
             _logger = logger;
+            _credentialService = credentialService;
             _departmentsService = departmentsService;
             _paymentService = paymentService;
             _employeeService = employeeService;
@@ -43,7 +45,7 @@ namespace EmploymentWebApp.Controllers
 
         public IActionResult Validate(string username, string password)
         {
-            if (username != null)
+            if (_credentialService.Find(c => c.Username == username && c.Password == password).Count() == 1)
             {
                 HttpContext.Session.SetString("SignIn", "success");
                 return RedirectToAction("Index");

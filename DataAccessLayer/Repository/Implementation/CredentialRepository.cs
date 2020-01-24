@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repository.Implementation
 {
-    public class PaymentRepository : Repository<Payment>, IPaymentRepository
+    public class CredentialRepository : Repository<Credential>, ICredentialRepository
     {
-        public PaymentRepository(DbContext context) : base(context)
+        public CredentialRepository(DbContext context) : base(context)
         {
         }
 

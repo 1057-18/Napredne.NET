@@ -11,6 +11,7 @@ namespace DataAccessLayer
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Credential> Credentials { get; set; }
 
         // injectujemo conn string iz app settings, napraviti konstruktor naseg contexta
         // koji ce da prima te opcije i salje konstruktoru DbContext klase
@@ -24,6 +25,8 @@ namespace DataAccessLayer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Credential>().HasKey(c => c.Id);
+
             modelBuilder.Entity<Department>().HasKey(d => d.Id);
 
             modelBuilder.Entity<Employee>().HasKey(e => e.Id);

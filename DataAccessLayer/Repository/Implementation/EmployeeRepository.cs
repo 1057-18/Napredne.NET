@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using DataAccessLayer.Models;
 using DataAccessLayer.Repository.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repository.Implementation
 {
     public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
-        public EmployeeRepository(EmploymentContext context) : base(context)
+        public EmployeeRepository(DbContext context) : base(context)
         {
         }
 

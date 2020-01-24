@@ -8,6 +8,7 @@ namespace DataAccessLayer.Repository
         IEmployeeRepository Employees { get; }
         IPaymentRepository Payments { get; }
         IDepartmentRepository Departments { get; }
+        ICredentialRepository Credentials { get;  }
 
         int Complete(); 
     }

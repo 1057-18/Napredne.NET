@@ -35,6 +35,7 @@ namespace EmploymentWebApp
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IDepartmentsService, DepartmentService>();
+            services.AddScoped<ICredentialService, CredentialService>();
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
             });
