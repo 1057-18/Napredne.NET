@@ -37,7 +37,7 @@ namespace EmploymentWebApp
             services.AddScoped<IDepartmentsService, DepartmentService>();
             services.AddScoped<ICredentialService, CredentialService>();
             services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(1);//You can set Time   
+                options.IdleTimeout = TimeSpan.FromMinutes(2);//You can set Time   
             });
         }
 

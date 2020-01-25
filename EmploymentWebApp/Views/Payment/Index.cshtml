@@ -3,7 +3,7 @@
     ViewData["Title"] = "Payment Register";
 }
 
-<div class="container-fluid" style="text-align: center">
+<div class="container-fluid" style="text-align: center; padding-top: 15px">
     <h4>Payment Register <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#paymentFilter"><i class="fas fa-layer-group"></i></button></h4><br /><br />
     <table class="table table-hover table-responsive-sm" style="border-bottom: 1px solid #dee2e6">
         <thead class="table-warning">
@@ -61,7 +61,7 @@
         var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
-    <nav class="fixed-bottom" aria-label="Page navigation" style="padding-top: 15px; padding-bottom: 78px">
+    <nav class="fixed-bottom" aria-label="Page navigation" style="padding-top: 15px; padding-bottom: 86px">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item @prevDisabled">
                 <a class="page-link" href="@(Url.Action("Index", "Payment", new { sortOrder = PaginatedList<PaymentViewModel>.SortOrder, pageNumber =  PaginatedList<PaymentViewModel>.PageIndex - 1, state = true }))" aria-label="Previous">
