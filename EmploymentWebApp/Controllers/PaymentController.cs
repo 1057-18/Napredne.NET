@@ -16,8 +16,9 @@ namespace EmploymentWebApp.Models
         private readonly IEmployeeService _employeeService;
         private readonly IPaymentService _paymentService;
         private readonly IDepartmentsService _departmentsService;
-        private static int _idEditedPayment = 0;
+        private static List<PaymentViewModel> tablePayments;
         private static List<PaymentType> filterChecked;
+        private static int chosenId;
         private static int filterMin;
         private static int filterMax;
 
@@ -87,26 +88,21 @@ namespace EmploymentWebApp.Models
             ViewData["PaymentTypes"] = paymentTypeViewModels;
             return View(PaginatedList<PaymentViewModel>.Create(PrepareForView(list), pageNumber ?? 1, 9, sortOrder));
         }
-        
-        public IActionResult AddOrEdit(int id = 0)
+
+        public IActionResult Add()
+        {
+            return View(new PaymentChooseModel());
+        }
+
+        public IActionResult Edit(int id)
         {
             if (HttpContext.Session.Get("SignIn") == null)
             {
                 return RedirectToAction("SignIn", "Home");
             }
-
-            if (id == 0)
-            {
-                return View(new PaymentViewModel() { HeaderString = "Add" }); ;
-            }
-            else
-            {
-                Payment payment = _paymentService.Get(id);
-                _idEditedPayment = payment.Id;
-                PaymentViewModel paymentViewModel = PaymentToPaymentViewModel(payment);
-                paymentViewModel.HeaderString = "Edit";
-                return View(paymentViewModel);
-            }
+            Payment payment = _paymentService.Get(id);
+            PaymentViewModel paymentViewModel = PaymentToPaymentViewModel(payment);
+            return View(paymentViewModel);
         }
 
         public IActionResult Details(int id)
@@ -115,25 +111,23 @@ namespace EmploymentWebApp.Models
             {
                 return RedirectToAction("SignIn", "Home");
             }
-
             return View(PaymentToPaymentViewModel(_paymentService.Get(id)));
         }
 
         public IActionResult Save(PaymentViewModel paymentViewModel)
         {
-            Payment payment = PaymentViewModelToPayment(paymentViewModel);
-            payment.Id = _idEditedPayment;
-            _idEditedPayment = 0;
-            if (!_paymentService.GetAllWithOutTracking().ToList().Contains(payment))
+            if (paymentViewModel.StringAmount != null)
             {
-                payment.Id = _paymentService.GetUniqueId();
-                _paymentService.Add(payment);
+                Payment payment = PaymentViewModelToPayment(paymentViewModel);
+                _paymentService.Update(payment);
+                return RedirectToAction("Index");
             }
             else
             {
-                _paymentService.Update(payment);
+                tablePayments.ForEach(p => p.PaymentForm.EmployeeId = chosenId);
+                _paymentService.AddRange(PrepareForSaving(tablePayments));
+                return PartialView("_Add", new PaymentChooseModel());
             }
-            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
@@ -142,9 +136,40 @@ namespace EmploymentWebApp.Models
             return RedirectToAction("Index");
         }
 
+        public IActionResult Choose(PaymentChooseModel paymentChooseModel)
+        {
+            chosenId = paymentChooseModel.Id.Value;
+            if(_employeeService.Find(e => e.Id == chosenId).Count() == 1)
+            {
+                tablePayments = new List<PaymentViewModel>();
+                return PartialView("_PaymentForm", new PaymentViewModel() { PaymentForm = new Payment() { EmployeeId = chosenId } });
+            }
+            else
+            {
+                return RedirectToAction("Reset", new { message = " does not exist." });
+            }
+        }
+
+        public PartialViewResult Reset(string message)
+        {
+            return PartialView("_Add", new PaymentChooseModel() { Helper = message });
+        }
+
+        public PartialViewResult Table(PaymentViewModel paymentViewModel)
+        {
+            paymentViewModel.PaymentForm.EmployeeId = chosenId;
+            tablePayments.Add(paymentViewModel);
+            return PartialView("_PaymentTable", tablePayments);
+        }
+
         private List<PaymentViewModel> PrepareForView(List<Payment> list)
         {
             return list.ConvertAll(p => PaymentToPaymentViewModel(p));
+        }
+
+        private List<Payment> PrepareForSaving(List<PaymentViewModel> list)
+        {
+            return list.ConvertAll(p => PaymentViewModelToPayment(p));
         }
 
         private PaymentViewModel PaymentToPaymentViewModel(Payment payment)
@@ -211,14 +236,14 @@ namespace EmploymentWebApp.Models
             return result;
         }
 
-        public List<Payment> FilterPayments(int minNum, int maxNum, List<PaymentTypeViewModel> paymentTypeViewModels, List<Payment> list)
+        private List<Payment> FilterPayments(int minNum, int maxNum, List<PaymentTypeViewModel> paymentTypeViewModels, List<Payment> list)
         {
             paymentTypeViewModels = paymentTypeViewModels.Where(p => p.IsChecked == true).ToList();
             list = list.Where(e => paymentTypeViewModels.Any(p => p.PaymentType == e.PaymentType) && e.Amount >= minNum && e.Amount <= maxNum).ToList();
             return list;
         }
 
-        public List<PaymentTypeViewModel> FilterSelectedPaymentTypes(List<PaymentType> AreChecked, List<PaymentTypeViewModel> paymentTypeViewModels)
+        private List<PaymentTypeViewModel> FilterSelectedPaymentTypes(List<PaymentType> AreChecked, List<PaymentTypeViewModel> paymentTypeViewModels)
         {
             if (AreChecked.Count == 0)
             {

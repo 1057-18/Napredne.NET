@@ -345,7 +345,7 @@ template {
 }
 
 .h4, h4 {
-    font-size: 1.5rem
+    font-size: 1.2rem
 }
 
 .h5, h5 {
@@ -1748,7 +1748,7 @@ pre {
 }
 
     .table-warning tbody + tbody, .table-warning td, .table-warning th, .table-warning thead th {
-        border-color: #d99b86
+        border-color: #dee2e6
     }
 
 .table-hover .table-warning:hover {
@@ -2606,9 +2606,9 @@ a.btn.disabled, fieldset:disabled a.btn {
     }
 
     .btn-warning.disabled, .btn-warning:disabled {
-        color: #212529;
-        background-color: #ffc107;
-        border-color: #ffc107
+        color: #464e57;
+        background-color: #edd4c0;
+        border-color: #edd4c0
     }
 
     .btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show > .btn-warning.dropdown-toggle {
@@ -3726,7 +3726,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
     .custom-select:disabled {
         color: #6c757d;
-        background-color: #e9ecef
+        background-color: #fafafa
     }
 
     .custom-select::-ms-expand {

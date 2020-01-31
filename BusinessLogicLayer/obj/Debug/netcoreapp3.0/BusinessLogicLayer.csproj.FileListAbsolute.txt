@@ -9,3 +9,4 @@
 /Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/obj/Debug/netcoreapp3.0/BusinessLogicLayer.csproj.CopyComplete
 /Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/obj/Debug/netcoreapp3.0/BusinessLogicLayer.dll
 /Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/obj/Debug/netcoreapp3.0/BusinessLogicLayer.pdb
+/Users/jovanbubonja/Desktop/Employment WebApp/BusinessLogicLayer/obj/Debug/netcoreapp3.0/BusinessLogicLayer.csproj.CoreCompileInputs.cache

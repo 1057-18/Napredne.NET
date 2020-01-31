@@ -1,0 +1,65 @@
+﻿@model PaymentChooseModel
+@{
+    ViewData["Title"] = "Add Payment";
+}
+
+<div class="container-fluid text-center" style="width: 1000px; text-align: center;">
+
+    <div class="row" id="paymentInput" style="justify-content: center; align-items: center;">
+        <div class="col-3">
+            <h4>Payment Add</h4>
+        </div>
+        <div class="col">
+            <form method="post" data-ajax="true" data-ajax-method="Post" data-ajax-mode="replace" data-ajax-update="#paymentInput" asp-action="Choose" style="padding-top: 36px">
+                <label>Employee ID</label><span asp-validation-for="Id" class="text-danger"></span>
+                <div class="form-row">
+                    <div class="col-10"><input class="form-control" type="text" asp-for="@Model.Id"/></div>
+                    <div class="col"><button type="submit" class="btn btn-secondary btn-block"><i class="fas fa-check"></i></button></div>
+                </div>
+                <br />
+            </form>
+            <form>
+                <label>Payment Type</label>
+                <select class="form-control custom-select" disabled>
+                </select><br />
+                <br />
+                <label>Amount</label>
+                <input class="form-control" type="text" disabled/>
+                <br />
+                <label>Note (optional)</label>
+                <textarea class="form-control" rows="4" type="text" disabled></textarea>
+                <br />
+                <br />
+                <button type="submit" class="btn btn-warning btn-block" disabled><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Add</button>
+            </form>
+            <form method="get" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fas fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+            </form>
+        </div>
+        <div class="col-5">
+            <div id="paymentTable" style="padding-left: 40px">
+                <table class="table table-responsive-sm" style="border-bottom: 1px solid #dee2e6; border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6">
+                    <thead class="table-warning">
+                        <tr>
+                            <th scope="col">Payment Type</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right">Empty</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <button type="submit" class="btn btn-warning btn-block" disabled><i class="fas fa-money-check-alt"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<i class="fas fa-money-check-alt"></i>-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

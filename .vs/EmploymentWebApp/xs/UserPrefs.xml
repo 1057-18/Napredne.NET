@@ -1,18 +1,23 @@
 ﻿<Properties StartupConfiguration="{EBA89EDB-7CD9-4B95-89F9-0EB4A471F676}|Default">
   <MonoDevelop.Ide.ItemProperties.EmploymentWebApp PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="EmploymentWebApp/Views/Employee/Details.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmploymentWebApp/Views/Payment/_PaymentForm.cshtml">
     <Files>
-      <File FileName="EmploymentWebApp/Views/Employee/Details.cshtml" Line="1" Column="1" />
-      <File FileName="EmploymentWebApp/Views/Employee/AddOrEdit.cshtml" Line="1" Column="1" />
+      <File FileName="EmploymentWebApp/Views/Payment/_PaymentForm.cshtml" Line="15" Column="184" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="EmploymentWebApp" expanded="True">
+            <Node name="BusinessLogicLayer" expanded="True">
+              <Node name="Implementation" expanded="True" />
+            </Node>
             <Node name="EmploymentWebApp" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Employee" expanded="True">
-                  <Node name="Details.cshtml" selected="True" />
+                <Node name="Employee" expanded="True" />
+                <Node name="Payment" expanded="True">
+                  <Node name="_PaymentForm.cshtml" selected="True" />
                 </Node>
               </Node>
             </Node>

@@ -1,16 +1,17 @@
 ﻿@model PaymentViewModel
 @{
-    ViewData["Title"] = "Add or Edit Payment";
+    ViewData["Title"] = "Edit Payment";
 }
 
 <div class="container-fluid text-center" style="width: 1000px; text-align: center;">
 
     <div class="row" style="justify-content: center; align-items: center;">
         <div class="col">
-            <h4>Payment @Model.HeaderString</h4>
+            <h4>Payment Edit</h4>
         </div>
         <div class="col">
-            <form method="post" asp-action="Save" style="padding-top: 36px">
+            <form id="editForm" method="post" asp-action="Save" style="padding-top: 36px">
+                <input class="form-control" type="hidden" asp-for="PaymentForm.Id" />
                 <label>Employee ID</label><span asp-validation-for="PaymentForm.EmployeeId" class="text-danger"></span>
                 <input class="form-control" type="text" asp-for="PaymentForm.EmployeeId" />
                 <br />
@@ -30,27 +31,11 @@
                 <textarea class="form-control" rows="4" type="text" asp-for="PaymentForm.Note"></textarea>
                 <br />
                 <br />
-                @if (Model.HeaderString == "Add")
-                {
-                    <button type="submit" class="btn btn-warning btn-block"><i class="fas fa-money-check-alt"></i>&nbsp;&nbsp;&nbsp;Submit</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('Are you sure you want to make changes to this record?')"><i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
-                }
+                <button type="submit" class="btn btn-warning btn-block" onclick="if ($('#editForm').valid()) { return confirm('Are you sure you want to make changes to this record?'); }"><i class="fas fa-file-invoice-dollar"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
             </form>
-            @if (Model.HeaderString == "Add")
-            {
-                <form method="get" style="padding-top: 10px">
-                    <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fas fa-table"></i>&nbsp;&nbsp;&nbsp;Back To Details</button>
-                </form>
-            }
-            else
-            {
-                <form method="post" style="padding-top: 10px">
-                    <button class="btn btn-secondary btn-block" asp-action="Details" asp-route-id="@Model.PaymentForm.Id"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back To Details</button>
-                </form>
-            }
+            <form method="post" style="padding-top: 10px">
+                <button class="btn btn-secondary btn-block" asp-action="Details" asp-route-id="@Model.PaymentForm.Id"><i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Back To Details</button>
+            </form>
         </div>
         <div class="col">
         </div>

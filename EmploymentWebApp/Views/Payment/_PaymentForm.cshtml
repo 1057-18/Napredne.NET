@@ -1,0 +1,62 @@
+﻿@model PaymentViewModel
+
+<div class="col-3">
+    <h4>Payment Add</h4>
+</div>
+<div class="col">
+    <form method="post" data-ajax="true" data-ajax-method="Post" data-ajax-mode="replace" data-ajax-update="#paymentInput" asp-action="Reset" style="padding-top: 36px">
+        <label>Employee ID</label>
+        <div class="form-row">
+            <div class="col-10"><input class="form-control" type="text" asp-for="PaymentForm.EmployeeId" disabled /></div>
+            <div class="col"><button type="submit" class="btn btn-secondary btn-block"><i class="fas fa-times"></i></button></div>
+        </div>
+        <br />
+    </form>
+    <form method="post" id="formInput" data-ajax="true" data-ajax-method="Post" data-ajax-mode="replace" data-ajax-update="#paymentTable" data-ajax-complete="document.getElementById('formInput').reset();" asp-action="Table">
+        <label>Payment Type</label><span asp-validation-for="StringPaymentType" class="text-danger"></span>
+        <select class="form-control custom-select" asp-for="StringPaymentType">
+            <option disabled selected></option>
+            @foreach (string paymentType in Model.PaymentTypes)
+            {
+                <option>@paymentType</option>
+            }
+        </select><br />
+        <br />
+        <label>Amount</label><span asp-validation-for="StringAmount" class="text-danger"></span>
+        <input class="form-control" type="text" asp-for="StringAmount" />
+        <br />
+        <label>Note (optional)</label><span asp-validation-for="PaymentForm.Note" class="text-danger"></span>
+        <textarea class="form-control" rows="4" type="text" asp-for="PaymentForm.Note"></textarea>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-warning btn-block"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;Add</button>
+    </form>
+    <form method="get" style="padding-top: 10px">
+        <button class="btn btn-secondary btn-block" asp-action="Index"><i class="fas fa-table"></i>&nbsp;&nbsp;&nbsp;Back To List</button>
+    </form>
+</div>
+<div class="col-5">
+    <div id="paymentTable" style="padding-left: 40px">
+        <table class="table table-hover table-responsive-sm" style="border-bottom: 1px solid #dee2e6; border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6">
+            <thead class="table-warning">
+                <tr>
+                    <th scope="col">Payment Type</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: right">Empty</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <button type="submit" class="btn btn-warning btn-block" disabled><i class="fas fa-money-check-alt"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+    </div>
+</div>
+
+<!--Nakon ajax parcijalnog poziva potrebno je ucitati validator za novoucitanu formu-->
+<script type="text/javascript">
+    $.validator.unobtrusive.parse("#formInput");
+</script>

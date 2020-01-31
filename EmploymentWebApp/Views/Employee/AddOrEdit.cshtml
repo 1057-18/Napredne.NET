@@ -10,7 +10,7 @@
             <h4>Employee @Model.HeaderString</h4>
         </div>
         <div class="col">
-            <form method="post" asp-action="Save" style="padding-top: 24px">
+            <form id="formAddOrEdit" method="post" asp-action="Save" style="padding-top: 24px">
                 <label>First Name</label><span asp-validation-for="EmployeeForm.FirstName" class="text-danger"></span>
                 <input class="form-control" type="text" asp-for="EmployeeForm.FirstName" />
                 <br />
@@ -36,11 +36,11 @@
                 <br />
                 @if (Model.HeaderString == "Add")
                 {
-                    <button type="submit" class="btn btn-info btn-block" )"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+                    <button type="submit" class="btn btn-info btn-block" )" onclick="if ($('#formAddOrEdit').valid()) { return confirm('Please confirm your submission.'); }"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;&nbsp;Submit</button>
                 }
                 else
                 {
-                    <button type="submit" class="btn btn-info btn-block" onclick="return confirm('Are you sure you want to make changes to this record?')"><i class="fas fa-user-check"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
+                    <button type="submit" class="btn btn-info btn-block" onclick="if ($('#formAddOrEdit').valid()) { return confirm('Are you sure you want to make changes to this record?'); }"><i class="fas fa-user-check"></i>&nbsp;&nbsp;&nbsp;Submit Changes</button>
                 }
             </form>
             @if (Model.HeaderString == "Add")
